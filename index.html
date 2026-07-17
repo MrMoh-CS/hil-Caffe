@@ -1,1 +1,585 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هيل كوفي | hil coffee - القهوة المختصة بنجران</title>
+    <style>
+        /* --- 1. الأنماط العامة والهوية البصرية --- */
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: #faf6f0; /* بيج فاتح ودافئ متناسق مع المنيو */
+            color: #4a2c2a; /* بني داكن مريح للعين */
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- 2. الهيدر الفاخر الشفاف --- */
+        header {
+            background: rgba(250, 246, 240, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(74, 44, 42, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .main-logo {
+            height: 50px;
+            width: auto;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            font-weight: 700;
+            font-size: 14px;
+            color: #704744;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav ul li a:hover { color: #b57c66; }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #b57c66;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after { width: 100%; }
+
+        /* --- 3. حاوية المحتوى الرئيسية --- */
+        main {
+            width: 100%;
+            padding: 0 4%;
+            margin: 30px 0;
+        }
+
+        section {
+            background: #ffffff;
+            border: 1px solid rgba(74, 44, 42, 0.05);
+            padding: 40px;
+            border-radius: 24px;
+            margin-bottom: 35px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(74, 44, 42, 0.03);
+        }
+
+        /* --- 4. قسم الترحيب البصري --- */
+        #about {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(181, 124, 102, 0.06) 0%, rgba(255, 255, 255, 1) 100%);
+            border: 1px solid rgba(181, 124, 102, 0.15);
+        }
+
+        #about h1 {
+            font-size: 34px;
+            font-weight: 900;
+            color: #4a2c2a;
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            color: #b57c66;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .info-badges {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .price-badge, .status-badge {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .price-badge {
+            background: rgba(74, 44, 42, 0.05);
+            color: #4a2c2a;
+        }
+
+        .status-badge {
+            color: #2ecc71;
+            background-color: rgba(46, 204, 113, 0.1);
+            border: 1px solid rgba(46, 204, 113, 0.2);
+        }
+
+        .description {
+            font-size: 15px;
+            color: #704744;
+            max-width: 650px;
+            margin: 15px auto 0 auto;
+        }
+
+        /* --- 5. شبكة المنيو التفاعلية الذكية --- */
+        .menu-section { background: transparent; border: none; box-shadow: none; padding: 0; }
+        
+        .menu-header-main { text-align: center; margin-bottom: 40px; }
+        .menu-title { font-size: 40px; font-weight: 900; color: #4a2c2a; }
+        .menu-subtitle { font-size: 16px; color: #b57c66; font-weight: 700; letter-spacing: 3px; }
+        .menu-hint { color: #8a7371; font-size: 13px; margin-top: 5px; }
+
+        @media (min-width: 768px) {
+            .menu-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 25px; }
+            .menu-header-main { grid-column: 1 / -1; }
+        }
+
+        .menu-accordion-item {
+            background: #ffffff;
+            border: 1px solid rgba(74, 44, 42, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            height: fit-content;
+            box-shadow: 0 4px 15px rgba(74, 44, 42, 0.02);
+        }
+
+        .menu-accordion-item:hover {
+            border-color: #b57c66;
+            transform: translateY(-3px);
+        }
+
+        .category-header {
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background-color: #fcfbfa;
+            user-select: none;
+            border-left: 4px solid #b57c66;
+        }
+
+        .category-title { font-size: 17px; color: #4a2c2a; font-weight: 700; }
+        
+        .accordion-icon {
+            font-size: 16px; color: #b57c66; background: rgba(181, 124, 102, 0.1);
+            width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%;
+        }
+
+        .category-content { max-height: 0; overflow: hidden; padding: 0 24px; background-color: #ffffff; }
+
+        .menu-accordion-item.active .category-content { max-height: 1000px; padding-top: 10px; padding-bottom: 20px; }
+        .menu-accordion-item.active .accordion-icon { transform: rotate(45deg); background: rgba(74, 44, 42, 0.05); color: #4a2c2a; }
+
+        /* عناصر المنيو المأخوذة من الصورة بدقة */
+        .menu-list-style li {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(74, 44, 42, 0.04);
+        }
+
+        .menu-list-style li:last-child { border-bottom: none; }
+        
+        .item-meta { display: flex; flex-direction: column; }
+        .item-name { color: #4a2c2a; font-weight: 600; font-size: 14.5px; }
+        .item-cal { color: #a89290; font-size: 11px; font-weight: bold; margin-top: 2px; }
+        .item-price { color: #b57c66; font-weight: 700; font-size: 15px; white-space: nowrap; }
+
+        /* --- 6. سلايدر المراجعات الدوار المتجاوب --- */
+        .reviews-container { display: flex; flex-direction: column; gap: 25px; }
+
+        @media (min-width: 992px) {
+            .reviews-container { display: grid; grid-template-columns: 240px 1fr; align-items: center; gap: 35px; }
+        }
+
+        .reviews-summary {
+            background: #fcfbfa; padding: 25px; border-radius: 20px; text-align: center;
+            border: 1px solid rgba(74, 44, 42, 0.06); height: 100%; display: flex; flex-direction: column; justify-content: center;
+        }
+
+        .rating-number { font-size: 48px; font-weight: 900; color: #4a2c2a; }
+        .stars { color: #ffb443; font-size: 22px; margin: 3px 0; }
+        .total-reviews { color: #8a7371; font-size: 13px; }
+
+        .carousel-wrapper { overflow: hidden; width: 100%; position: relative; border-radius: 20px; }
+        .carousel-track { display: flex; width: 300%; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .carousel-slide { width: 33.333%; display: flex; gap: 15px; }
+
+        .review-card {
+            flex: 1; background: #fcfbfa; border: 1px solid rgba(74, 44, 42, 0.05);
+            padding: 20px; border-radius: 16px; display: flex; flex-direction: column; justify-content: space-between; min-height: 160px;
+        }
+
+        .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid rgba(74, 44, 42, 0.04); padding-bottom: 8px; }
+        .reviewer-name { font-weight: 700; color: #4a2c2a; font-size: 14px; }
+        .review-stars { font-size: 12px; color: #ffb443; }
+        .review-text { font-size: 13px; color: #704744; line-height: 1.6; }
+
+        .carousel-controls { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
+        .carousel-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(74, 44, 42, 0.15); border: none; cursor: pointer; }
+        .carousel-dot.active { background: #b57c66; width: 22px; border-radius: 50px; }
+
+        /* --- 7. قنوات الطلب والموقع الجغرافي --- */
+        .location-container { display: flex; flex-direction: column; gap: 20px; }
+
+        @media (min-width: 768px) {
+            .location-container { flex-direction: row; justify-content: space-between; align-items: center; }
+        }
+
+        .location-details { font-style: normal; color: #704744; font-size: 15px; line-height: 1.8; }
+        
+        .action-buttons-group { display: flex; gap: 12px; flex-wrap: wrap; }
+        
+        .btn-style {
+            display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px;
+            border-radius: 12px; font-weight: 700; font-size: 14.5px; box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .map-btn { background: #4a2c2a; color: #ffffff; }
+        .map-btn:hover { background: #b57c66; transform: translateY(-3px); }
+        
+        .hunger-btn { background: #ff3d00; color: #ffffff; }
+        .hunger-btn:hover { background: #e03500; transform: translateY(-3px); }
+
+        #location h2, #contact h2 { color: #4a2c2a; font-size: 20px; font-weight: 700; margin-bottom: 20px; position: relative; padding-bottom: 6px; }
+        #location h2::after, #contact h2::after { content: ''; position: absolute; bottom: 0; right: 0; width: 35px; height: 3px; background: #b57c66; border-radius: 2px; }
+
+        .phone-link { display: inline-block; background: #b57c66; color: #ffffff; padding: 12px 35px; border-radius: 12px; font-weight: 700; font-size: 15px; }
+        .phone-link:hover { transform: translateY(-3px); background: #9c6550; }
+
+        /* --- 8. تذييل الصفحة --- */
+        footer { text-align: center; padding: 30px; background: #4a2c2a; color: #faf6f0; font-size: 12px; margin-top: 50px; opacity: 0.95; }
+
+        /* --- 9. التجاوب مع الجوال --- */
+        @media (max-width: 767px) {
+            header { flex-direction: column; gap: 12px; padding: 12px 4%; }
+            nav ul { gap: 12px; }
+            section { padding: 25px 20px; }
+            #about h1 { font-size: 26px; }
+            .carousel-slide { flex-direction: column; gap: 12px; }
+            .carousel-track { transform: none !important; flex-direction: column; width: 100%; }
+            .carousel-slide { width: 100%; }
+            .carousel-controls { display: none; }
+            .location-container { text-align: center; }
+            .action-buttons-group { justify-content: center; width: 100%; }
+            .btn-style { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- الهيدر واللوجو الجديد بعد إضافة الشعار -->
+<header>
+    <div class="logo-container">
+        <!-- استبدلنا الـ h2 بـ وسم الصورة هنا -->
+        <a href="#">
+            <img src="logo.png" alt="شعار هيل كوفي" class="logo-img">
+        </a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#about">عن هيل</a></li>
+            <li><a href="#menu">المنيو</a></li>
+            <li><a href="#reviews">الآراء</a></li>
+            <li><a href="#location">موقعنا</a></li>
+        </ul>
+    </nav>
+</header>
+
+    <main>
+        <!-- القسم الترحيبي وحالة العمل المستقرة -->
+        <section id="about">
+            <h1>هيل كوفي | hil coffee</h1>
+            <p class="tagline">هاء ياء لام</p>
+            <div class="info-badges">
+                <span class="price-badge">💵 متوسط الأسعار: ٢٠–٤٠ ر.س.</span>
+                <span class="status-badge">🟢 مفتوح الآن - على مدار الساعة</span>
+            </div>
+            <p class="description">
+                نستقبلكم في هيل كوفي لنقدم لكم تشكيلة فاخرة من القهوة المقطرة والمشروبات الباردة والساخنة المبتكرة مع مجموعة من الحلويات الطازجة وسط بيئة رايقة ومثالية للمذاكرة والعمل.
+            </p>
+        </section>
+
+        <!-- قائمة الطعام التفاعلية (Accordion Grid) مأخوذة بالكامل من صورتك -->
+        <section id="menu" class="menu-section">
+            <div class="menu-header-main">
+                <h2 class="menu-title">قائمة المشروبات والحلا</h2>
+                <span class="menu-subtitle">MENU</span>
+                <p class="menu-hint">انقر على التصنيف لعرض الأصناف والسعرات الحرارية</p>
+            </div>
+
+            <!-- 1. المشروبات الساخنة -->
+            <div class="menu-accordion-item">
+                <div class="category-header">
+                    <h3 class="category-title">☕ المشروبات الساخنة</h3>
+                    <span class="accordion-icon">＋</span>
+                </div>
+                <div class="category-content">
+                    <ul class="menu-list-style">
+                        <li><div class="item-meta"><span class="item-name">سبانش لاتيه</span><span class="item-cal">230 CAL</span></div><span class="item-price">17 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">ماتشا لاتيه</span><span class="item-cal">230 CAL</span></div><span class="item-price">17 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">فلات وايت</span><span class="item-cal">13 CAL</span></div><span class="item-price">15 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">لاتيه</span><span class="item-cal">190 CAL</span></div><span class="item-price">15 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">كابتشينو</span><span class="item-cal">120 CAL</span></div><span class="item-price">15 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">موكا</span><span class="item-cal">230 CAL</span></div><span class="item-price">15 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">هوت شوكليت</span><span class="item-cal">230 CAL</span></div><span class="item-price">15 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">ميكاتو</span><span class="item-cal">24 CAL</span></div><span class="item-price">14 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">كورتادو</span><span class="item-cal">120 CAL</span></div><span class="item-price">14 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">اسبريسو</span><span class="item-cal">5 CAL</span></div><span class="item-price">12 alignment</span></li>
+                        <li><div class="item-meta"><span class="item-name">امريكانو</span><span class="item-cal">11 CAL</span></div><span class="item-price">10 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">كرك</span><span class="item-cal">148 CAL</span></div><span class="item-price">4 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">شاي</span><span class="item-cal">45 CAL</span></div><span class="item-price">2 ريال</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2. المشروبات الباردة -->
+            <div class="menu-accordion-item">
+                <div class="category-header">
+                    <h3 class="category-title">❄️ المشروبات الباردة</h3>
+                    <span class="accordion-icon">＋</span>
+                </div>
+                <div class="category-content">
+                    <ul class="menu-list-style">
+                        <li><div class="item-meta"><span class="item-name">ايس موكا</span><span class="item-cal">385 CAL</span></div><span class="item-price">17 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">ايس ماتشا لاتيه</span><span class="item-cal">320 CAL</span></div><span class="item-price">17 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">ايس بستاشيو لاتيه</span><span class="item-cal">340 CAL</span></div><span class="item-price">17 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">ايس سبانش لاتيه</span><span class="item-cal">340 CAL</span></div><span class="item-price">15 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">ايس لاتيه</span><span class="item-cal">120 CAL</span></div><span class="item-price">15 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">ايس امريكانو</span><span class="item-cal">13 CAL</span></div><span class="item-price">12 ريال</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 3. القهوة المقطرة -->
+            <div class="menu-accordion-item">
+                <div class="category-header">
+                    <h3 class="category-title">🧪 القهوة المقطرة</h3>
+                    <span class="accordion-icon">＋</span>
+                </div>
+                <div class="category-content">
+                    <ul class="menu-list-style">
+                        <li><div class="item-meta"><span class="item-name">V60 ( حار - آيس )</span><span class="item-cal">حسب المحصول</span></div><span class="item-price">17 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">قهوة اليوم</span><span class="item-cal">5 CAL</span></div><span class="item-price">10 ريال</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 4. الموميتو (الموهيتو الأصلي) -->
+            <div class="menu-accordion-item">
+                <div class="category-header">
+                    <h3 class="category-title">🍹 الموميتو</h3>
+                    <span class="accordion-icon">＋</span>
+                </div>
+                <div class="category-content">
+                    <ul class="menu-list-style">
+                        <li><div class="item-meta"><span class="item-name">كودرد غابة hil</span><span class="item-cal">203 CAL</span></div><span class="item-price">16 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">ماجيكو</span><span class="item-cal">120 CAL</span></div><span class="item-price">14 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">كركديه hil</span><span class="item-cal">79 CAL</span></div><span class="item-price">12 ريال</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 5. الحلا والحلويات -->
+            <div class="menu-accordion-item">
+                <div class="category-header">
+                    <h3 class="category-title">🍰 أصناف الحلا</h3>
+                    <span class="accordion-icon">＋</span>
+                </div>
+                <div class="category-content">
+                    <ul class="menu-list-style">
+                        <li><div class="item-meta"><span class="item-name">فرنش توست (بالبيكان)</span><span class="item-cal">255 CAL</span></div><span class="item-price">22 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">شوكليت دبي</span><span class="item-cal">255 CAL</span></div><span class="item-price">22 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">تشيز كيك الهبة / كيكة كوكنت</span><span class="item-cal">401 CAL</span></div><span class="item-price">20 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">كيكة العسل</span><span class="item-cal">255 CAL</span></div><span class="item-price">20 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">التشيز كيك بولز / تشيز كيك لوبز</span><span class="item-cal">401 CAL</span></div><span class="item-price">20 ريال</span></li>
+                        <li><div class="item-meta"><span class="item-name">كوكيز بيكان / بودينق الموز</span><span class="item-cal">220 CAL</span></div><span class="item-price">10 ريال</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم التقييمات الحقيقية المضافة من قبلك وعرضها بسلايدر ثلاثي متطور -->
+        <section id="reviews">
+            <h2>ماذا يقول زوارنا؟</h2>
+            <div class="reviews-container">
+                <div class="reviews-summary">
+                    <div class="rating-huge">
+                        <span class="rating-number">4.4</span>
+                        <span class="stars">⭐⭐⭐⭐☆</span>
+                        <p class="total-reviews">بناءً على ٢٧١ تعليقاً</p>
+                    </div>
+                </div>
+
+                <div class="carousel-wrapper">
+                    <div class="carousel-track" id="carouselTrack">
+                        
+                        <!-- المجموعة الأولى -->
+                        <div class="carousel-slide">
+                            <div class="review-card">
+                                <div class="review-header"><span class="reviewer-name">نوف آل سالم</span><span class="review-stars">⭐⭐⭐⭐⭐</span></div>
+                                <p class="review-text">اخذنا سكوب كوكيز وفرنش توست وثنين سبانيش لاتيه لذيذة جداً، والمكان جميل وهادئ ويقدمون الماء مجاني جزاهم الله خير.</p>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-header"><span class="reviewer-name">bedoor Alyami</span><span class="review-stars">⭐⭐⭐⭐⭐</span></div>
+                                <p class="review-text">كوفي هيل نجران تجربة جميلة، أجواء هادية وتعامل راقي أنصحكم تجربون شيزكيك وحلا الهبة وحلا كوكنت شكراً كوفي هيل.</p>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-header"><span class="reviewer-name">M K</span><span class="review-stars">⭐⭐⭐⭐⭐</span></div>
+                                <p class="review-text">المكان رايق وقهوتهم حلوة وممتازة جداً ♥️ نوع الطلب داخل الكافيه وأنصح بالزيارة بالتأكيد.</p>
+                            </div>
+                        </div>
+
+                        <!-- المجموعة الثانية -->
+                        <div class="carousel-slide">
+                            <div class="review-card">
+                                <div class="review-header"><span class="reviewer-name">Promisesa</span><span class="review-stars">⭐⭐⭐⭐⭐</span></div>
+                                <p class="review-text">افضل وجهه للطلاب اللي يبون يذاكرون بااجواء حلوه. القهوة لذيذة ماتغيرت والمحاصيل تستاهل التجربة 👌🏼 كوكيز البيكان جميل جداً.</p>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-header"><span class="reviewer-name">Mohsen Abdullah</span><span class="review-stars">⭐⭐⭐⭐⭐</span></div>
+                                <p class="review-text">ممتاز جداً وعندهم أصناف كثيرة ومتنوعة بالمنيو، والجلسات مريحة والأجواء داخل الكوفي راقية ولطيفة.</p>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-header"><span class="reviewer-name">Alfaresi A</span><span class="review-stars">⭐⭐⭐⭐⭐</span></div>
+                                <p class="review-text">قهوتهم الاثيوبيه V60 لذيذة جداً ومحاصيلهم ممتازة. المكان رايق والتعامل راقي وسريع من الموظفين 👍🏻.</p>
+                            </div>
+                        </div>
+
+                        <!-- المجموعة الثالثة -->
+                        <div class="carousel-slide">
+                            <div class="review-card">
+                                <div class="review-header"><span class="reviewer-name">Amal Designer</span><span class="review-stars">⭐⭐⭐⭐⭐</span></div>
+                                <p class="review-text">لذيذ فرنش توست البيكان وتشيز كيك لوبز وv60 لذيذه الله يزيدهم قهووووووتهم شي جنان 🤤.</p>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-header"><span class="reviewer-name">ali alsagoor</span><span class="review-stars">⭐⭐⭐⭐⭐</span></div>
+                                <p class="review-text">بودينق الموز يشبه المعصوب لكن لذيذ جدًا وقهوتهم لذيذة.. وأشكر الشباب على التعامل الراقي والسرعة رغم الزحمة.</p>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-header"><span class="reviewer-name">RM Al</span><span class="review-stars">⭐⭐⭐⭐⭐</span></div>
+                                <p class="review-text">جربت حلى الكوكيز، بصراحة الطعم لذيذ جدًا. الكاشير كان محترم ومتعاون وخدمني بالشكل المطلوب تماماً.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="carousel-controls">
+                    <button class="carousel-dot active" data-slide="0"></button>
+                    <button class="carousel-dot" data-slide="1"></button>
+                    <button class="carousel-dot" data-slide="2"></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الموقع الجغرافي وقنوات الطلب أونلاين -->
+        <section id="location">
+            <h2>أين تجدنا؟</h2>
+            <div class="location-container">
+                <address class="location-details">
+                    📍 الرديف، طريق الملك عبدالله، نجران 66261 <br>
+                    🏪 الموقع: محطة أغادير <br>
+                    📌 رمز الموقع: G6GG+FH نجران
+                </address>
+                <div class="action-buttons-group">
+                    <a href="https://maps.app.goo.gl/n3tvMw4fYokRjEPE8" target="_blank" rel="noopener noreferrer" class="btn-style map-btn">
+                        🗺️ قوقل ماب - Google Maps
+                    </a>
+                    <a href="https://www.hungerstation.com/" target="_blank" rel="noopener noreferrer" class="btn-style hunger-btn">
+                        🚗 اطلب عبر هنقرستيشن
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الاتصال الفوري -->
+        <section id="contact">
+            <h2>اتصل بنا مباشرة</h2>
+            <div class="contact-buttons">
+                <a href="tel:0568655248" class="phone-link">📞 اضغط للاتصال: 056 865 5248</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 هيل كوفي | hil coffee. جميع الحقوق محفوظة ومحمية.</p>
+    </footer>
+
+    <!-- الجزء التفاعلي للأكورديون والسلايدر -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // سكريبت الأكورديون للمنيو الذكي
+            const accordionHeaders = document.querySelectorAll(".category-header");
+            accordionHeaders.forEach(header => {
+                header.addEventListener("click", () => {
+                    header.parentElement.classList.toggle("active");
+                });
+            });
+
+            // سكريبت تشغيل السلايدر التدويري للمراجعات
+            const track = document.getElementById("carouselTrack");
+            const dots = document.querySelectorAll(".carousel-dot");
+            let currentIndex = 0;
+
+            function goToSlide(index) {
+                currentIndex = index;
+                if (track) {
+                    // الانتقال بمقدار 33.333% لكل مجموعة أفقياً
+                    track.style.transform = `translateX(${currentIndex * 33.333}%)`;
+                }
+                dots.forEach(dot => dot.classList.remove("active"));
+                if (dots[currentIndex]) dots[currentIndex].classList.add("active");
+            }
+
+            dots.forEach(dot => {
+                dot.addEventListener("click", (e) => {
+                    const slideIndex = parseInt(e.target.getAttribute("data-slide"));
+                    goToSlide(slideIndex);
+                });
+            });
+
+            // حركة تلقائية كل 5 ثوانٍ للشاشات العريضة
+            setInterval(() => {
+                if (window.innerWidth >= 768) {
+                    let nextIndex = (currentIndex + 1) % 3;
+                    goToSlide(nextIndex);
+                }
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
